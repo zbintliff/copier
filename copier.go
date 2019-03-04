@@ -183,7 +183,7 @@ func set(to, from reflect.Value, options ...map[CopyOption]bool) bool {
 		} else if scanner, ok := to.Addr().Interface().(sql.Scanner); ok && !opts[DisableScanner] {
 			scanner.Scan(from.Interface())
 		} else if from.Kind() == reflect.Ptr {
-			return set(to, from.Elem())
+			return set(to, from.Elem(), options...)
 		} else {
 			return false
 		}
